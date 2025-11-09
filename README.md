@@ -338,4 +338,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Built with ❤️ using Web3 technologies**
+**Built with ❤️ by UtkarshV**
