@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
-require('dotenv').config({ path: './.env.local' });
+require("dotenv").config({ path: "./.env.local" });
+const { PRIVATE_KEY, INFURA_API_KEY } = process.env;
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -7,15 +8,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   for (const account of accounts) {
     console.log(account.address);
   }
-})
+});
 
-const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY
+// const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY;
 
 module.exports = {
   solidity: "0.8.10",
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545"
+      url: "http://127.0.0.1:8545",
+    },
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [PRIVATE_KEY],
     },
     // polygon: {
     //   url: process.env.NEXT_PUBLIC_RPC_URL,
@@ -29,6 +34,5 @@ module.exports = {
     //   gasPrice: 3000000000, // 3 Gwei for testnet
     //   gas: 5000000
     // }
-  }
+  },
 };
-
